@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,5 +30,15 @@ public class Projectile : MonoBehaviour
             );
             // Debug.DrawLine(transform.position, rb.);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Enemy"))
+        {
+            gameObject.transform.parent = other.transform;
+            rb.isKinematic = true;
+          }
     }
 }

@@ -90,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5eff27fe3e0f99e4db3be17e9f61699a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 9218622348951853705}
   - component: {fileID: 7586241573601950900}
   - component: {fileID: 6111376354749088999}
+  - component: {fileID: 7937003490899277338}
   m_Layer: 0
   m_Name: Player v2
   m_TagString: Untagged
@@ -280,6 +281,7 @@ MonoBehaviour:
   shootPointDefaultRot: {x: 0, y: 0, z: 0}
   aimingRotSpeed: 50
   rotLimit: -70
+  pathFollower: {fileID: 0}
 --- !u!114 &6111376354749088999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +299,21 @@ MonoBehaviour:
   CollidableLayers:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &7937003490899277338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311915661427743041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathCreator: {fileID: 0}
+  endOfPathInstruction: 0
+  speed: 5
 --- !u!1001 &586749125752557250
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -65,7 +65,8 @@ public class ShootPointScript : MonoBehaviour
             GameObject newArrow = Instantiate(playerController.arrow, transform.position, transform.rotation);
             newArrow.GetComponent<Rigidbody>().velocity = transform.forward * playerController.shootingPower;
 
-            transform.rotation = Quaternion.Euler(playerController.shootPointDefaultRot);
+            //  transform.rotation = Quaternion.Euler(playerController.shootPointDefaultRot);
+            transform.localRotation = Quaternion.Euler(playerController.shootPointDefaultRot);
         }
     }
 }
