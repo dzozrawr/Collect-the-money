@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
-    public Transform com;
     public Rigidbody rb;
 
     private float rotationSpeed = 10f;

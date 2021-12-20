@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     public GameObject arrow;
     public Transform shootPoint;
 
-    Vector3 shootPointDefaultRot;
+    public Vector3 shootPointDefaultRot;
 
     public float aimingRotSpeed = 20f;
-    private float rotLimit = -70f;
+    public float rotLimit = -70f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+/*        if (Input.GetMouseButton(0))
         {
             float newXVal = shootPoint.rotation.eulerAngles.x - aimingRotSpeed * Time.deltaTime;
 
@@ -41,6 +41,6 @@ public class PlayerController : MonoBehaviour
             newArrow.GetComponent<Rigidbody>().velocity = shootPoint.transform.forward * shootingPower;
 
             shootPoint.rotation = Quaternion.Euler(shootPointDefaultRot);
-        }
+        }*/
     }
 }
