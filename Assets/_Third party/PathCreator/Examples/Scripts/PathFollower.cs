@@ -34,5 +34,10 @@ namespace PathCreation.Examples
         void OnPathChanged() {
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
         }
+
+        public void SetClosestDistanceAlongPath()   //before this only transform.position needs to be changed
+        {
+            distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+        }
     }
 }

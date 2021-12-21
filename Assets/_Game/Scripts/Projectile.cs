@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     public Rigidbody rb;
 
     private float rotationSpeed = 10f;
+
+    [SerializeField] private int dmg = 25;  //basic enemy HP is 100
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +39,11 @@ public class Projectile : MonoBehaviour
         GameObject other = collision.gameObject;
         if (other.CompareTag("Enemy"))
         {
+           // Debug.Log("other.CompareTag(Enemy)");
             gameObject.transform.parent = other.transform;
             rb.isKinematic = true;
-          }
+
+            other.GetComponent<EnemyScript>().takeDmg(dmg);
+        }
     }
 }

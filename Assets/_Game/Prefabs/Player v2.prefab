@@ -282,6 +282,7 @@ MonoBehaviour:
   aimingRotSpeed: 50
   rotLimit: -70
   pathFollower: {fileID: 0}
+  pathCreator: {fileID: 0}
 --- !u!114 &6111376354749088999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
-  speed: 5
+  speed: -5.2
 --- !u!1001 &586749125752557250
 PrefabInstance:
   m_ObjectHideFlags: 0

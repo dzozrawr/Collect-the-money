@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PathCreation;
 using PathCreation.Examples;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float rotLimit = -70f;
 
     public PathFollower pathFollower;
+    public PathCreator pathCreator;
 
     private float defaultSpeed;
     // Start is called before the first frame update
@@ -23,6 +25,9 @@ public class PlayerController : MonoBehaviour
     {
         shootPointDefaultRot = shootPoint.localRotation.eulerAngles;
         defaultSpeed = pathFollower.speed;
+        transform.position = pathCreator.path.GetPointAtTime(0.9f);
+        pathFollower.SetClosestDistanceAlongPath();
+      //  transform.position = pathCreator.path.GetPointAtDistance(5f);
     }
 
     // Update is called once per frame
