@@ -16,6 +16,8 @@ public class EnemyScript : MonoBehaviour
     private float rOffset, gOffset, bOffset;
 
     public Animator enemyAnimator;
+
+    private PlayerController playerController;
     
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,8 @@ public class EnemyScript : MonoBehaviour
         rOffset = grayMat.color.r - enemyObjectWithMat.GetComponent<Renderer>().material.color.r;
         gOffset = grayMat.color.g - enemyObjectWithMat.GetComponent<Renderer>().material.color.g;
         bOffset = grayMat.color.b - enemyObjectWithMat.GetComponent<Renderer>().material.color.b;
+
+        playerController=GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -38,6 +42,8 @@ public class EnemyScript : MonoBehaviour
 
     public void takeDmg(int dmg)
     {
+        if (HP <= 0) return;
+
         float dmgPercent = ((float)dmg) / HP;
         HP -= dmg;
         Color matColor= enemyObjectWithMat.GetComponent<Renderer>().material.color;
@@ -58,9 +64,9 @@ public class EnemyScript : MonoBehaviour
 
             //disable bezier curve follow
             transform.parent = null;
-
-
             enemyLineManager.decEnemies();
+
+            gameObject.GetComponent<Collider>().enabled = false;
         //    Destroy(gameObject);  //destroy enemy for now
         }
     }
@@ -72,7 +78,9 @@ public class EnemyScript : MonoBehaviour
         {
             Transform enemyGroup = transform.parent.parent;
             // Debug.Log("OnTriggerEnter(Collider other)");
-            enemyGroup.GetComponent<EnemyGroupManager>().setSpeed(0f);    //
+            enemyGroup.GetComponent<EnemyGroupManager>().setSpeed(0f);    //stop the whole group
+            playerController.GoToBarricadeState();
+
             other.gameObject.GetComponent<BarricadeScript>().initiateBarricadeDestruction(enemyGroup);
         }
     }

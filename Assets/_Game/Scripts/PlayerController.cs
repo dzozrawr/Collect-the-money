@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnimator;
 
     public GameObject theArrowCharacterIsHolding;
+
+    private bool isDefaultState = true, isBarricadeState = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,20 +45,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            pathFollower.speed = 0f;
-            playerAnimator.SetBool("Shoot", true);
-            theArrowCharacterIsHolding.SetActive(true);
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            pathFollower.speed = defaultSpeed;
-            playerAnimator.SetTrigger("Run");
-            playerAnimator.SetBool("Shoot", false);
-            theArrowCharacterIsHolding.SetActive(false);
-        }
+       if(isDefaultState&&!isBarricadeState)  DefaultState();
+       if(!isDefaultState && isBarricadeState) BarricadeState();
         /*        
                 {
                     float newXVal = shootPoint.rotation.eulerAngles.x - aimingRotSpeed * Time.deltaTime;
@@ -77,5 +67,68 @@ public class PlayerController : MonoBehaviour
 
                     shootPoint.rotation = Quaternion.Euler(shootPointDefaultRot);
                 }*/
+    }
+
+    private void DefaultState()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            pathFollower.speed = 0f;
+            playerAnimator.SetBool("Shoot", false);
+            playerAnimator.SetBool("Shoot", true);
+            theArrowCharacterIsHolding.SetActive(true);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            pathFollower.speed = defaultSpeed;
+            playerAnimator.SetTrigger("Run");
+            playerAnimator.SetBool("Shoot", false);
+            theArrowCharacterIsHolding.SetActive(false);
+        }
+    }
+
+    private void BarricadeState()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            playerAnimator.SetBool("Shoot", true);
+            theArrowCharacterIsHolding.SetActive(true);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+          //  playerAnimator.SetTrigger("Run");
+            playerAnimator.SetBool("Shoot", false);
+            theArrowCharacterIsHolding.SetActive(false);
+        }
+    }
+
+    public void SetSpeed(float s)   //change the name of the method
+    {
+        pathFollower.speed = 0f;
+       // playerAnimator.SetTrigger("TurnAround");
+       //need to make special animations for turn around and then shooting
+    }
+
+    public void GoToBarricadeState()
+    {
+        pathFollower.speed = 0f;
+        playerAnimator.SetBool("Shoot",true);
+        isBarricadeState = true;
+        isDefaultState = false;
+    }
+
+    public void GoToDefaultState()
+    {
+        pathFollower.speed = defaultSpeed;
+        playerAnimator.SetTrigger("Run");
+        isBarricadeState = false;
+        isDefaultState = true;
+    }
+
+    public void SetDefaultSpeed()
+    {
+        pathFollower.speed = defaultSpeed;
     }
 }

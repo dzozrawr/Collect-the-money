@@ -7,12 +7,13 @@ public class BarricadeScript : MonoBehaviour
     Transform enemyGroup;
 
     int numOfPhases = 3, curDestructPhase=0;
-    float destructionPhaseDur = 0.25f;
+    float destructionPhaseDur = 1f; //was 0.25f
 
     public GameObject theModel;
 
     public Material[] matPhases;
 
+    private PlayerController playerController;
     private void Awake()
     {
         
@@ -21,7 +22,7 @@ public class BarricadeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         //theModel.GetComponent<Renderer>().material
     }
 
@@ -54,6 +55,7 @@ public class BarricadeScript : MonoBehaviour
             //explode barricade
                 
             enemyGroup.GetComponent<EnemyGroupManager>().setDefaultSpeed(); //change enemies speed
+            playerController.GoToDefaultState();
             Destroy(gameObject);  // destroy barricade
             return;
         }
