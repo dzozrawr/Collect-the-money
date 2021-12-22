@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/QuickSetupScene.unity
+    path: Assets/_Third party/Ensar's models/QuickSetupScene.unity
     guid: c6c42342cdca5274199bdda008fba433
   - enabled: 1
     path: Assets/_Game/Scenes/QuickSetupScene.unity

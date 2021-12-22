@@ -16,17 +16,27 @@ public class PlayerController : MonoBehaviour
     public float aimingRotSpeed = 20f;
     public float rotLimit = -70f;
 
+    public float shootingPowerIncreaseRate = 20f;
+    public float shootingPowerLimit = 70f;
+    public float shootingDefaultValue;
+
     public PathFollower pathFollower;
     public PathCreator pathCreator;
 
     private float defaultSpeed;
+
+    public Animator playerAnimator;
+
+    public GameObject theArrowCharacterIsHolding;
     // Start is called before the first frame update
     void Start()
     {
         shootPointDefaultRot = shootPoint.localRotation.eulerAngles;
         defaultSpeed = pathFollower.speed;
-        transform.position = pathCreator.path.GetPointAtTime(0.9f);
+        transform.position = pathCreator.path.GetPointAtTime(0.8f);
         pathFollower.SetClosestDistanceAlongPath();
+
+        shootingDefaultValue = shootingPower;
       //  transform.position = pathCreator.path.GetPointAtDistance(5f);
     }
 
@@ -36,11 +46,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             pathFollower.speed = 0f;
+            playerAnimator.SetBool("Shoot", true);
+            theArrowCharacterIsHolding.SetActive(true);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             pathFollower.speed = defaultSpeed;
+            playerAnimator.SetTrigger("Run");
+            playerAnimator.SetBool("Shoot", false);
+            theArrowCharacterIsHolding.SetActive(false);
         }
         /*        
                 {

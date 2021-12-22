@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     private float rotationSpeed = 10f;
 
     [SerializeField] private int dmg = 25;  //basic enemy HP is 100
+
+    private float timeForDestruction = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,5 +47,22 @@ public class Projectile : MonoBehaviour
 
             other.GetComponent<EnemyScript>().takeDmg(dmg);
         }
+
+        if (other.CompareTag("Floor"))
+        {
+            
+
+            rb.isKinematic = true;
+            gameObject.GetComponent<Collider>().enabled = false;
+            transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+
+            Invoke(nameof(SelfDestruct), timeForDestruction);
+          //  other.GetComponent<EnemyScript>().takeDmg(dmg);
+        }
+    }
+
+    private void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }

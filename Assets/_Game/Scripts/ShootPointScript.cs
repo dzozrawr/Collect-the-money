@@ -35,6 +35,13 @@ public class ShootPointScript : MonoBehaviour
         {
             Vector3 newPoint = startingPosition + t * startingVelocity;
             newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / 2f * t * t;
+
+            if (Physics.OverlapSphere(newPoint, 0.1f, CollidableLayers).Length > 0)
+            {
+                lineRenderer.positionCount = points.Count;
+                break;
+            }
+
             points.Add(newPoint);
 
             //
@@ -49,14 +56,14 @@ public class ShootPointScript : MonoBehaviour
 
             float newXVal = transform.rotation.eulerAngles.x - playerController.aimingRotSpeed * Time.deltaTime;
 
-            if (((newXVal - 360f) < playerController.rotLimit) && ((newXVal - 360f) > -360f)) newXVal = playerController.rotLimit;
+            if (((newXVal - 360f) < playerController.rotLimit) && ((newXVal - 360f) > -360f)) newXVal = playerController.rotLimit;      //changing angle
 
 
 
             transform.rotation = Quaternion.Euler(newXVal, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-
         }
+
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -68,5 +75,35 @@ public class ShootPointScript : MonoBehaviour
             //  transform.rotation = Quaternion.Euler(playerController.shootPointDefaultRot);
             transform.localRotation = Quaternion.Euler(playerController.shootPointDefaultRot);
         }
+
+
+        /*   if (Input.GetMouseButton(0))
+           {
+               if (!lineRenderer.enabled)
+               {
+                   playerController.shootingPower = playerController.shootingDefaultValue;
+                   lineRenderer.enabled = true;
+               }
+
+
+               float newShootingPower = playerController.shootingPower + playerController.shootingPowerIncreaseRate * Time.deltaTime;
+
+               if (newShootingPower <= playerController.shootingPowerLimit) playerController.shootingPower = newShootingPower;           //changing velocity
+
+
+
+               // transform.rotation = Quaternion.Euler(newXVal, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+           }
+
+           if (Input.GetMouseButtonUp(0))
+           {
+               if (lineRenderer.enabled) lineRenderer.enabled = false;
+
+               GameObject newArrow = Instantiate(playerController.arrow, transform.position, transform.rotation);
+               newArrow.GetComponent<Rigidbody>().velocity = transform.forward * playerController.shootingPower;
+
+
+           }*/
     }
 }
