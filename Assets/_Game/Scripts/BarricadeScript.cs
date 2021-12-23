@@ -6,14 +6,20 @@ public class BarricadeScript : MonoBehaviour
 {
     Transform enemyGroup;
 
-    int numOfPhases = 3, curDestructPhase=0;
+    int numOfPhases = 5, curDestructPhase=0;
     float destructionPhaseDur = 3f; //was 0.25f
 
-    public GameObject theModel;
+    public GameObject theModelParent;
+
+    public GameObject[] theModel;
 
     public Material[] matPhases;
 
     private PlayerController playerController;
+
+    public GameObject theDoor;
+
+    private float timeToDie = 6f;
     private void Awake()
     {
         
@@ -46,17 +52,37 @@ public class BarricadeScript : MonoBehaviour
     private void destroyPhase()
     {
         //change texture
-        if(curDestructPhase< matPhases.Length) theModel.GetComponent<Renderer>().material = matPhases[curDestructPhase];
+        if (curDestructPhase < matPhases.Length)
+        {
+            for (int i = 0; i < theModelParent.transform.childCount; i++)
+            {
+                theModelParent.transform.GetChild(i).GetComponent<Renderer>().material = matPhases[curDestructPhase];
+            }
+          //  theModel.GetComponent<Renderer>().material = matPhases[curDestructPhase];
+        }
+
         curDestructPhase++;
+        Debug.Log(curDestructPhase);
      //   Debug.Log(curDestructPhase);
         if(curDestructPhase== numOfPhases)
         {
 
             //explode barricade
-                
+            for (int i = 0; i < theModelParent.transform.childCount; i++)
+            {
+                theModelParent.transform.GetChild(i).GetComponent<Rigidbody>().isKinematic = false;
+            }
+
             enemyGroup.GetComponent<EnemyGroupManager>().setDefaultSpeed(); //change enemies speed
             playerController.GoToDefaultState();
-            Destroy(gameObject);  // destroy barricade
+
+            //disable the trigger collider that stops the enemies
+            gameObject.GetComponent<Collider>().enabled = false;
+
+            //destroy the door
+            Destroy(theDoor);
+            // destroy barricade after a while
+            Destroy(gameObject, timeToDie); 
             return;
         }
         Invoke(nameof(destroyPhase), destructionPhaseDur);

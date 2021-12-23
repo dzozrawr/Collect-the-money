@@ -20,6 +20,8 @@ public class EnemyScript : MonoBehaviour
     private PlayerController playerController;
 
     private float timeToDie = 6f;
+
+    public ParticleSystem coinExplosion;
     
     // Start is called before the first frame update
     void Start()
@@ -78,6 +80,9 @@ public class EnemyScript : MonoBehaviour
 
     private void DyingSequence()
     {
+        //coin explosion
+        coinExplosion.Play();
+
         for (int i = 0; i < transform.childCount; i++)  //delete all arows in the body
         {
             if (transform.GetChild(i).CompareTag("Arrow"))

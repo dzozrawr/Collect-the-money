@@ -14,7 +14,13 @@ public class ShootPointScript : MonoBehaviour
 
     public LayerMask CollidableLayers;
 
+    public GameObject hitMarker;
+
+    public LayerMask GateLayer;
+
     private GameObject enemyTracker=null;
+
+    private GameObject oldHitMarker = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +76,11 @@ public class ShootPointScript : MonoBehaviour
 
         if (lineRenderer.enabled)
         {
+/*            if (oldHitMarker != null)
+            {
+                Destroy(oldHitMarker);
+                oldHitMarker = null;
+            }*/
 
             lineRenderer.positionCount = numPoints;
             List<Vector3> points = new List<Vector3>();
@@ -87,6 +98,14 @@ public class ShootPointScript : MonoBehaviour
                     lineRenderer.positionCount = points.Count;
                     break;
                 }
+
+/*
+                if (Physics.OverlapSphere(newPoint, 0.1f, GateLayer, QueryTriggerInteraction.Collide).Length > 0)
+                {
+                  //  oldHitMarker= Instantiate(hitMarker, newPoint,Quaternion.identity);
+                   // lineRenderer.positionCount = points.Count;
+                    break;
+                }*/
 
                 points.Add(newPoint);
 
