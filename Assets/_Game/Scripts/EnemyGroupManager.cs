@@ -68,6 +68,7 @@ public class EnemyGroupManager : MonoBehaviour
         if (lineCount == 0)
         {
             //do stuff
+            Destroy(gameObject);
         }
     }
 }

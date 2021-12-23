@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Barricade
   - Floor
+  - Arrow
+  - EnemyTracker
+  - Multiply
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,8 @@ public class EnemyScript : MonoBehaviour
     public Animator enemyAnimator;
 
     private PlayerController playerController;
+
+    private float timeToDie = 6f;
     
     // Start is called before the first frame update
     void Start()
@@ -67,8 +69,23 @@ public class EnemyScript : MonoBehaviour
             enemyLineManager.decEnemies();
 
             gameObject.GetComponent<Collider>().enabled = false;
-        //    Destroy(gameObject);  //destroy enemy for now
+
+            //delete all the arrows on enemy's body and die after a while (for now)
+            DyingSequence();
+            //    Destroy(gameObject);  //destroy enemy for now
         }
+    }
+
+    private void DyingSequence()
+    {
+        for (int i = 0; i < transform.childCount; i++)  //delete all arows in the body
+        {
+            if (transform.GetChild(i).CompareTag("Arrow"))
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+        Destroy(gameObject, timeToDie);
     }
 
     private void OnTriggerEnter(Collider other)

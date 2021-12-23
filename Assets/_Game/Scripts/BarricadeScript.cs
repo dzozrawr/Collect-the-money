@@ -7,7 +7,7 @@ public class BarricadeScript : MonoBehaviour
     Transform enemyGroup;
 
     int numOfPhases = 3, curDestructPhase=0;
-    float destructionPhaseDur = 1f; //was 0.25f
+    float destructionPhaseDur = 3f; //was 0.25f
 
     public GameObject theModel;
 

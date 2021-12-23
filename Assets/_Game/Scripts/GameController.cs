@@ -7,8 +7,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-      //  Time.timeScale = 3;
-      //  Debug.Log("Time.timeScale =" + Time.timeScale);
+        Time.timeScale = 3f;
+        Debug.Log("Time.timeScale =" + Time.timeScale);
     }
     // Start is called before the first frame update
     void Start()

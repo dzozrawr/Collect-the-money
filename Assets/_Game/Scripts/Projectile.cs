@@ -11,6 +11,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int dmg = 25;  //basic enemy HP is 100
 
     private float timeForDestruction = 2f;
+
+    private HashSet<int> collidedGatesIdList = new HashSet<int>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,5 +67,10 @@ public class Projectile : MonoBehaviour
     private void SelfDestruct()
     {
         Destroy(gameObject);
+    }
+
+    public bool addCollidedGateId(int gateId)
+    {
+       return collidedGatesIdList.Add(gateId);
     }
 }

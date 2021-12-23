@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
     public void GoToDefaultState()
     {
         pathFollower.speed = defaultSpeed;
+        playerAnimator.SetBool("Shoot", false);
         playerAnimator.SetTrigger("Run");
         isBarricadeState = false;
         isDefaultState = true;
