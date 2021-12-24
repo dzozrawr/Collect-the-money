@@ -33,6 +33,11 @@ public class EnemyGroupManager : MonoBehaviour
         pathFollower.speed = speed;
     }
 
+    public float getSpeed()
+    {
+        return pathFollower.speed;
+    }
+
     public void setDefaultSpeed()
     {
         pathFollower.speed = defaultSpeed;

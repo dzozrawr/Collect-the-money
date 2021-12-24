@@ -93,18 +93,18 @@ public class ShootPointScript : MonoBehaviour
                 Vector3 newPoint = startingPosition + t * startingVelocity;
                 newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / 2f * t * t;
 
-                if (Physics.OverlapSphere(newPoint, 0.1f, CollidableLayers).Length > 0)
-                {
-                    lineRenderer.positionCount = points.Count;
-                    break;
-                }
+                /*                if (Physics.OverlapSphere(newPoint, 0.1f, CollidableLayers).Length > 0)
+                                {
+                                    lineRenderer.positionCount = points.Count;
+                                    break;
+                                }*/
 
-/*
-                if (Physics.OverlapSphere(newPoint, 0.1f, GateLayer, QueryTriggerInteraction.Collide).Length > 0)
+
+/*                if (Physics.OverlapSphere(newPoint, 0.1f, GateLayer, QueryTriggerInteraction.Collide).Length > 0)
                 {
-                  //  oldHitMarker= Instantiate(hitMarker, newPoint,Quaternion.identity);
-                   // lineRenderer.positionCount = points.Count;
-                    break;
+                     oldHitMarker= Instantiate(hitMarker, newPoint,Quaternion.identity);
+                     lineRenderer.positionCount = points.Count;
+                    // break;
                 }*/
 
                 points.Add(newPoint);

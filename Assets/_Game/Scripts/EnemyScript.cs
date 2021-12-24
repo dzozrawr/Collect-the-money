@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation.Examples;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class EnemyScript : MonoBehaviour
     private float timeToDie = 6f;
 
     public ParticleSystem coinExplosion;
+
+    private GameController gameController;
+
+    public int coinWorth = 100;
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +41,7 @@ public class EnemyScript : MonoBehaviour
         bOffset = grayMat.color.b - enemyObjectWithMat.GetComponent<Renderer>().material.color.b;
 
         playerController=GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -83,6 +89,11 @@ public class EnemyScript : MonoBehaviour
         //coin explosion
         coinExplosion.Play();
 
+        //add coins to the coinScore in the UI
+        gameController.addCoinsToScore(coinWorth);
+
+      //  coinExplosion.transform.parent = null;
+
         for (int i = 0; i < transform.childCount; i++)  //delete all arows in the body
         {
             if (transform.GetChild(i).CompareTag("Arrow"))
@@ -98,12 +109,24 @@ public class EnemyScript : MonoBehaviour
       //  Debug.Log("OnTriggerEnter(Collider other)");
         if (other.gameObject.CompareTag("Barricade"))
         {
+            //add once flag, after the destruction reset the flag
+
+
             Transform enemyGroup = transform.parent.parent;
-            // Debug.Log("OnTriggerEnter(Collider other)");
+
+            if (enemyGroup.GetComponent<EnemyGroupManager>().getSpeed()==0f)    //speed==0 serves as the once flag, can be changed later
+            {
+                return;
+            }
+
+                // Debug.Log("OnTriggerEnter(Collider other)");
             enemyGroup.GetComponent<EnemyGroupManager>().setSpeed(0f);    //stop the whole group
             playerController.GoToBarricadeState();
 
             other.gameObject.GetComponent<BarricadeScript>().initiateBarricadeDestruction(enemyGroup);
+
+            //enable UI call to action- shoot them now!
+            gameController.enableShootThemNowText();
         }
     }
 

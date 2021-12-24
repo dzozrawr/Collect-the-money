@@ -50,8 +50,16 @@ public class Projectile : MonoBehaviour
 
             other.GetComponent<EnemyScript>().takeDmg(dmg);
         }
+        else
+        {
+            rb.isKinematic = true;
+            gameObject.GetComponent<Collider>().enabled = false;
+            transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
 
-        if (other.CompareTag("Floor"))
+            Invoke(nameof(SelfDestruct), timeForDestruction);
+        }
+
+/*        if (other.CompareTag("Floor"))
         {
             
 
@@ -61,7 +69,7 @@ public class Projectile : MonoBehaviour
 
             Invoke(nameof(SelfDestruct), timeForDestruction);
           //  other.GetComponent<EnemyScript>().takeDmg(dmg);
-        }
+        }*/
     }
 
     private void SelfDestruct()

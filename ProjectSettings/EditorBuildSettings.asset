@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/QuickSetupScene.unity
     guid: cdf0d27555b8cee46b411a1c3e1ac9d2
+  - enabled: 1
+    path: Assets/_Game/Scenes/FirstScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

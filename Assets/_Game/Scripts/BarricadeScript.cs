@@ -16,6 +16,7 @@ public class BarricadeScript : MonoBehaviour
     public Material[] matPhases;
 
     private PlayerController playerController;
+    private GameController gameController;
 
     public GameObject theDoor;
 
@@ -29,6 +30,8 @@ public class BarricadeScript : MonoBehaviour
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         //theModel.GetComponent<Renderer>().material
     }
 
@@ -62,7 +65,6 @@ public class BarricadeScript : MonoBehaviour
         }
 
         curDestructPhase++;
-        Debug.Log(curDestructPhase);
      //   Debug.Log(curDestructPhase);
         if(curDestructPhase== numOfPhases)
         {
@@ -82,7 +84,10 @@ public class BarricadeScript : MonoBehaviour
             //destroy the door
             Destroy(theDoor);
             // destroy barricade after a while
-            Destroy(gameObject, timeToDie); 
+            Destroy(gameObject, timeToDie);
+
+            //disable cta shoot them now
+            gameController.disableShootThemNowText();
             return;
         }
         Invoke(nameof(destroyPhase), destructionPhaseDur);

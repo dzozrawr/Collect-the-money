@@ -132,4 +132,13 @@ public class PlayerController : MonoBehaviour
     {
         pathFollower.speed = defaultSpeed;
     }
+
+/*    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("OnTriggerEnter");
+        if (other.CompareTag("DoorClose"))
+        {
+          //  Debug.Log("OnTriggerEnter");
+        }
+    }*/
 }
