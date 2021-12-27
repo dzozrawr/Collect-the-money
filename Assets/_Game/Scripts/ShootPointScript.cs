@@ -21,6 +21,8 @@ public class ShootPointScript : MonoBehaviour
     private GameObject enemyTracker=null;
 
     private GameObject oldHitMarker = null;
+
+    private GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +32,19 @@ public class ShootPointScript : MonoBehaviour
         lineRenderer.enabled = false;
 
         enemyTracker = GameObject.FindGameObjectWithTag("EnemyTracker");
+
+        gameController= GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameController.IsGameOver())
+        {
+            lineRenderer.enabled = false;
+            return;
+        }
+        
         if (enemyTracker != null)
         {
             transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, enemyTracker.transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);

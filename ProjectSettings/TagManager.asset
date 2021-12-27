@@ -12,6 +12,7 @@ TagManager:
   - Multiply
   - DoorClose
   - CoinDestination
+  - EnemyGroup
   layers:
   - Default
   - TransparentFX

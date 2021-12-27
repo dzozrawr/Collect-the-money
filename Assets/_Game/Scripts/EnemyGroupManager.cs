@@ -10,11 +10,15 @@ public class EnemyGroupManager : MonoBehaviour
     private PathFollower pathFollower;
 
     private float defaultSpeed;
+
+    private GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
         pathFollower=gameObject.GetComponent<PathFollower>();
         defaultSpeed = pathFollower.speed;
+
+        gameController= GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -74,6 +78,17 @@ public class EnemyGroupManager : MonoBehaviour
         {
             //do stuff
             Destroy(gameObject);
+
+            gameController.PlayVictorySequence(); //trigger gameControllers victory sequence
+
+        }
+    }
+
+    public void TriggerCheer()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<EnemyLineManager>().TriggerCheer();
         }
     }
 }

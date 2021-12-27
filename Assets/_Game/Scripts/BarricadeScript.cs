@@ -75,7 +75,7 @@ public class BarricadeScript : MonoBehaviour
                 theModelParent.transform.GetChild(i).GetComponent<Rigidbody>().isKinematic = false;
             }
 
-            enemyGroup.GetComponent<EnemyGroupManager>().setDefaultSpeed(); //change enemies speed
+            if (enemyGroup != null) enemyGroup.GetComponent<EnemyGroupManager>().setDefaultSpeed(); //change enemies speed
             playerController.GoToDefaultState();
 
             //disable the trigger collider that stops the enemies

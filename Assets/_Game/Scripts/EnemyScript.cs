@@ -27,7 +27,8 @@ public class EnemyScript : MonoBehaviour
     private GameController gameController;
 
     public int coinWorth = 100;
-    
+
+    private bool triggerCheerOnce = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -127,6 +128,22 @@ public class EnemyScript : MonoBehaviour
 
             //enable UI call to action- shoot them now!
             gameController.enableShootThemNowText();
+        }
+
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (!triggerCheerOnce)
+            {
+                Transform enemyGroup = transform.parent.parent;
+                enemyGroup.GetComponent<EnemyGroupManager>().TriggerCheer();
+                triggerCheerOnce = true;
+            }
+ 
         }
     }
 

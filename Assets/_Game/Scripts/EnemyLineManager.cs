@@ -48,6 +48,14 @@ public class EnemyLineManager : MonoBehaviour
         }
     }
 
+    public void TriggerCheer()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<EnemyScript>().enemyAnimator.SetTrigger("Cheer");
+        }
+    }
+
     public void Destroy()
     {
         Destroy(gameObject);

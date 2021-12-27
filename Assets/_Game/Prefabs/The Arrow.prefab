@@ -135,7 +135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2178161366910133630, guid: 2b56bc6b2d2542d43a07256c7cffc2a6, type: 3}
       propertyPath: m_Time
-      value: 0.33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2178161366910133630, guid: 2b56bc6b2d2542d43a07256c7cffc2a6, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time

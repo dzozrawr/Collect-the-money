@@ -30,21 +30,28 @@ public class PlayerController : MonoBehaviour
     public GameObject theArrowCharacterIsHolding;
 
     private bool isDefaultState = true, isBarricadeState = false;
+
+    public ParticleSystem coinsThrowParticles;
+
+    private GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
         shootPointDefaultRot = shootPoint.localRotation.eulerAngles;
         defaultSpeed = pathFollower.speed;
-        transform.position = pathCreator.path.GetPointAtTime(0.8f);
+        transform.position = pathCreator.path.GetPointAtTime(0.9f);
         pathFollower.SetClosestDistanceAlongPath();
 
         shootingDefaultValue = shootingPower;
+
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
       //  transform.position = pathCreator.path.GetPointAtDistance(5f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameController.IsGameOver()) return; 
        if(isDefaultState&&!isBarricadeState)  DefaultState();
        if(!isDefaultState && isBarricadeState) BarricadeState();
         /*        
@@ -133,12 +140,28 @@ public class PlayerController : MonoBehaviour
         pathFollower.speed = defaultSpeed;
     }
 
-/*    private void OnTriggerEnter(Collider other)
+    public void PlayCoinsThrow()
     {
-        Debug.Log("OnTriggerEnter");
-        if (other.CompareTag("DoorClose"))
-        {
-          //  Debug.Log("OnTriggerEnter");
+        coinsThrowParticles.gameObject.SetActive(true);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+    //    Debug.Log("OnCollisionEnter");
+        if (collision.gameObject.CompareTag("Enemy")){
+            
+
+            //game controller game over
+            gameController.PlayGameOverSequence();
         }
-    }*/
+    }
+
+    /*    private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("OnTriggerEnter");
+            if (other.CompareTag("DoorClose"))
+            {
+              //  Debug.Log("OnTriggerEnter");
+            }
+        }*/
 }

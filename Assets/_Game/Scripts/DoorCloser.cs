@@ -17,7 +17,7 @@ public class DoorCloser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isClosing)
+        if (isClosing&& (theDoor!=null))
         {
            // Debug.Log("transform.localRotation.eulerAngles.y=" + transform.localRotation.eulerAngles.y);
          //   float newYRot = theDoor.transform.localRotation.eulerAngles.y - closingSpeed * Time.deltaTime;      //we do a little bit of hard coding (should've find the offset or set the desired angle)
